@@ -1,44 +1,34 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class GoogleSearchTestJava {
-    private GoogleSearchpage googlesearch;
+    private GoogleSearchPage googlesearch;
     private ChromeDriver driver;
 
-
-
-    @Before
+    @BeforeMethod
     public void setUp(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Studentb\\Desktop\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
-        googlesearch = new GoogleSearchpage(driver);
-    }
+        googlesearch = new GoogleSearchPage(driver);
+        }
 
-    @Test
-    public void search(){
+        @Test
+        public void test(){
+          googlesearch.search("Armenia");
+         String a= googlesearch.getFirstResult().getText();
+         Assert.assertTrue(a.contains("Wikipedia"));
+        }
 
-        googlesearch.search("Armenia");
+       // @AfterMethod
+   // public void quite(){
 
-    }
+          //  driver.close();
+      //  }
 
-
-
-
-
-
-
-
-
-
-    @After
-    public void tearDown(){
-
-        driver.quit();
-        driver.close();
-
-    }
 
 
 }
